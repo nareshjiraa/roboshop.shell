@@ -16,7 +16,7 @@ cd /app
 echo -e "\e[33minstall dependencies\e[0m"
 npm install
 echo -e "\e[34mcopy catalouge Systemd file \e[0m"
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp /home/centos/roboshop.shell/catalogue.service /etc/systemd/system/catalogue.service
 sed -i -e 's|<MONGODB-SERVER-IPADDRESS>|mongodb-dev.mahadevops.online|' /etc/systemd/system/catalogue.service
 echo -e "\e[35mrestart\e[0m"
 systemctl daemon-reload
