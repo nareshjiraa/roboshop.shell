@@ -24,5 +24,5 @@ systemctl start shipping
 echo -e "\e[36m<<installmysqlclient>>\e[0m"
 yum install mysql -y
 echo -e "\e[36m<<Load Schema>>\e[0m"
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql
+mysql -h mysql-dev.mahadevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
 systemctl restart shipping
