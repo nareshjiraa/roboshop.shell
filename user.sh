@@ -1,6 +1,6 @@
 script=$(realpath "0$")
 script_path=$(dirname "$script")
-source ${scipt_path}/common.sh
+source ${script_path}/common.sh
 component=user
 func_nodejs
 echo -e "\e[32m<<<<< setup MongoDB repo>>>>\e[0m"
