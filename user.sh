@@ -1,3 +1,6 @@
+script=$(realpath "0$")
+script_path=$(dirname "$script")
+source ${scipt_path}/common.sh
 echo -e "\e[32m<<<<<setup node js repo>>>>\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 echo -e "\e[32m<<<<<install nodejs>>>>\e[0m"
@@ -16,14 +19,14 @@ echo -e "\e[32m<<<<<download dependencies>>>>\e[0m"
 cd /app
 npm install
 echo -e "\e[32m<<<<<Setup SystemD User Service>>>>\e[0m"
-cp /home/centos/roboshop.shell/user.service /etc/systemd/system/user.service
+cp ${script_path}/user.service /etc/systemd/system/user.service
 echo -e "\e[32m<<<<<Load the service>>>>\e[0m"
 systemctl daemon-reload
 echo -e "\e[32m<<<<<Start service>>>>\e[0m"
 systemctl enable user
 systemctl start user
 echo -e "\e[32m<<<<< setup MongoDB repo>>>>\e[0m"
-cp /home/centos/roboshop.shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[32m<<<<< install mongodb-client>>>>\e[0m"
 yum install mongodb-org-shell -y
 echo -e "\e[32m<<<<< Load Schemat>>>>\e[0m"

@@ -1,3 +1,6 @@
+script=$(realpath "0$")
+script_path=$(dirname "$script")
+source ${scipt_path}/common.sh
 echo -e "\e[31m<<<Install GoLang>>\e[0m"
 yum install golang -y
 echo -e "\e[31m<<<user add>>\e[0m"
@@ -14,7 +17,7 @@ go mod init dispatch
 go get
 go build
 echo -e "\e[31m<<<setup systemd service>>\e[0m"
-cp /home/centos/roboshop.shell/dispatch.service /etc/systemd/system/dispatch.service
+cp ${script_path}/dispatch.service /etc/systemd/system/dispatch.service
 echo -e "\e[31m<<<load service>>\e[0m"
 systemctl daemon-reload
 echo -e "\e[31m<<<start service>>\e[0m"
