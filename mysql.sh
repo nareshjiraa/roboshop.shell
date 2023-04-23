@@ -1,3 +1,4 @@
+mysql_root_password=$1
 script=$(realpath "0$")
 script_path=$(dirname "$script")
 source ${scipt_path}/common.sh
@@ -11,6 +12,6 @@ echo -e "\e[35m<<<start service>>\e[0m"
 systemctl enable mysqld
 systemctl start mysqld
 echo -e "\e[35m<<<set root passwd>>\e[0m"
-mysql_secure_installation --set-root-pass RoboShop@1
+mysql_secure_installation --set-root-pass ${mysql_root_password}
 echo -e "\e[35m<<<test oot passwd>>\e[0m"
 mysql -uroot -pRoboShop@1

@@ -1,5 +1,6 @@
 script=$(realpath "0$")
 script_path=$(dirname "$script")
+mysql_root_password=$1
 source ${scipt_path}/common.sh
 echo -e "\e[36m<<install maven>>\e[0m"
 yum install maven -y
@@ -27,5 +28,5 @@ systemctl start shipping
 echo -e "\e[36m<<installmysqlclient>>\e[0m"
 yum install mysql -y
 echo -e "\e[36m<<Load Schema>>\e[0m"
-mysql -h mysql-dev.mahadevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+mysql -h mysql-dev.mahadevops.online -uroot -p${mysql_root_password} < /app/schema/shipping.sql
 systemctl restart shipping
