@@ -19,7 +19,7 @@ func_nodejs() {
   cd /app
   npm install
   echo -e "\e[33m<<<<<setup suystemd service>>\e[0m"
-  cp ${scipt_path}/${component}.service /etc/systemd/system/${component}.service
+  cp ${script_path}/${component}.service /etc/systemd/system/${component}.service
   echo -e "\e[33m<<<<<load service>>\e[0m"
   systemctl daemon-reload
   echo -e "\e[33m<<<<<start service>>\e[0m"
