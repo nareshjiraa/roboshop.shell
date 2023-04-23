@@ -5,6 +5,7 @@ echo -e "\e[32m<<<install python 3.6>>\e[0m"
 yum install python36 gcc python3-devel -y
 echo -e "\e[32m<<add user>>\e[0m"
 useradd roboshop
+rm -r /app
 echo -e "\e[32m<<add app directory>>\e[0m"
 mkdir /app
 echo -e "\e[32m<<Download the application code>>\e[0m"
