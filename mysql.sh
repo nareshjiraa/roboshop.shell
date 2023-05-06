@@ -1,7 +1,13 @@
-mysql_root_password=$1
 script=$(realpath "0$")
 script_path=$(dirname "$script")
 source ${scipt_path}/common.sh
+mysql_root_password=$1
+
+if [ -z "mysql_root_password" ]; then
+  echo input mysql root password missing
+  exit
+fi
+
 echo -e "\e[35m<<<disable mysql 8>>\e[0m"
 dnf module disable mysql -y
 echo -e "\e[35m<<<setup mysql 5.7>>\e[0m"
