@@ -7,22 +7,34 @@ if [ -z "rabbitmq_appuser_password" ]; then
   echo input rabbitmq appuser pasword missing
   exit
 fi
-echo -e "\e[36m<<<setup rabbitmq repos>>\e[0m"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 
-echo -e "\e[36m<<<install erlang>>\e[0m"
-yum install erlang -y
+func_print_head "Setup MongoDB"
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
+func_stat_check $?
 
-echo -e "\e[36m<<<YUM Repos for RabbitMQ.>>\e[0m"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+func_print_head "setup rabbitmq repos"
+curl -s https://pakagecloud.io/instcall/repositories/rabbitmq/erlang/script.rpm.sh | bash
+func_stat_check $?
 
-echo -e "\e[36m<<<Install RabbitMQ server>>\e[0m"
-yum install rabbitmq-server -y
 
-echo -e "\e[36m<<<Start RabbitMQ Service>>\e[0m"
-systemctl enable rabbitmq-server
-systemctl start rabbitmq-server
+func_print_head "install erlang"
+yum install erlang -y &>>$log_file
+func_stat_check $?
 
-echo -e "\e[36m<<<add user>>\e[0m"
-rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+func_print_head "YUM Repos for RabbitMQ"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>$log_file
+func_stat_check $?
+
+func_print_head "Install RabbitMQ server"
+yum install rabbitmq-server -y &>>$log_file
+func_stat_check $?
+
+func_print_head "Start RabbitMQ Service"
+systemctl enable rabbitmq-server &>>$log_file
+systemctl start rabbitmq-server &>>$log_file
+func_stat_check $?
+
+func_print_head "add user"
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>$log_file
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
+func_stat_check $?
